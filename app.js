@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 8080;
 // Requiring Express and server dependencies
 const express = require("express");
 const ejs = require("ejs");
-const ejs = require("ejs");
+const methodOverride = require("method-override");
 
 // Setting app to use express
 const app = express();
