@@ -1,5 +1,6 @@
 # System generated files
 node_modules
+data
 
 # Logfiles
 npm-debug.log
