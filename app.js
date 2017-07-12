@@ -20,10 +20,6 @@ var entries = [
   {name: "Entry 3", image: "https://farm9.staticflickr.com/8442/7962474612_bf2baf67c0.jpg", text: "Lorem to the ipsum"}
 ];
 
-
-
-
-
 // ROUTES
 
 // Index
