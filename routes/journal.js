@@ -40,7 +40,7 @@ router.get("/new", function(req, res){
 // SHOW
 router.get("/:id", function(req, res) {
   // find entry with the provided ID
-  Entry.findByID(req.params.id).populate("comments").exec(function(err, foundEntry){
+  Entry.findById(req.params.id).populate("comments").exec(function(err, foundEntry){
       if (err){
         console.log(err);
       } else {

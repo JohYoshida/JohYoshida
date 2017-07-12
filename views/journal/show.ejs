@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+
+<div class="ui segment">
+  <div class="ui centered card">
+    <div class="medium image">
+      <img src="<%= entry.image %>">
+    </div>
+    <div class="content">
+      <div class="header">
+        <%= entry.name %>
+      </div>
+      <div class="text">
+        <%= entry.text %>
+      </div>
+    </div>
+    <div class="ui small button">
+      <a href="/journal">Back to index</a>
+    </div>
+  </div>
+</div>
+
+<% include ../partials/footer %>
