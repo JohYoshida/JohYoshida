@@ -13,11 +13,20 @@
         <%= entry.text %>
       </div>
     </div>
-    <div class="ui small inverted blue button">
-      <a href="/journal/<%= entry._id %>/edit">Edit entry</a>
-    </div>
-    <div class="ui small button">
-      <a href="/journal">Back to index</a>
+    <div class="ui centered grid">
+      <div class="row">
+        <div class="ui small inverted blue button">
+          <a href="/journal/<%= entry._id %>/edit">Edit entry</a>
+        </div>
+        <div class="ui small button">
+          <a href="/journal">Back to index</a>
+        </div>
+      </div>
+      <div class="row">
+        <form class="deleteForm" action="/journal/<%= entry._id %>?_method=DELETE" method="POST">
+          <button class="ui red centered button">Delete</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

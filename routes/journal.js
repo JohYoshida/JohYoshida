@@ -68,10 +68,21 @@ router.put("/:id", function(req, res){
   Entry.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedEntry){
     if (err){
       console.log(err)
-      res.redirect("journal");
+      res.redirect("/journal");
     } else {
       // return to show page
-      res.redirect("journal/" + req.params.id);
+      res.redirect("/journal/" + req.params.id);
+    }
+  });
+});
+
+// DESTROY
+router.delete("/:id", function(req, res){
+  Entry.findByIdAndRemove(req.params.id, function(err){
+    if (err){
+      res.redirect("/journal");
+    } else {
+      res.redirect("/journal");
     }
   });
 });

@@ -9,31 +9,28 @@ const mongoose       = require("mongoose");
 const methodOverride = require("method-override");
 const Entry          = require("./models/entry");
 
+// Defining app routes
+const journalRoutes  = require("./routes/journal");
+
 // Setting app to use express
 const app            = express();
 
-// Requiring routes
-const journalRoutes = require("./routes/journal");
-app.use ("/journal", journalRoutes);
-
-mongoose.connect('mongodb://localhost/test');
-app.use(bodyParser.urlencoded({extended: true}));
+// Configuring app
 app.set("view engine", "ejs");
+
+// Telling Express to use the /public folder as default route
+app.use(express.static(__dirname + "/public"));
+
+// Configuring middleware
+app.use(bodyParser());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 
-// Entry.create(
-//     {
-//       name: "Granite Hill",
-//       image: "https://farm1.staticflickr.com/60/215827008_6489cd30c3.jpg",
-//       text: "This is a huge granite hill. No bathrooms. No water. Beautiful granite!"
-//     }, function(err, entry){
-//     if (err){
-//       console.log(err);
-//     } else {
-//       console.log("NEW ENTRY");
-//       console.log(entry);
-//     }
-//   });
+// Setting app to use routes defined above
+app.use ("/journal", journalRoutes);
+
+// Connecting Mongoose to test
+mongoose.connect('mongodb://localhost/test');
 
 // Open Mongoose connection
 var db = mongoose.connection;
