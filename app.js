@@ -7,7 +7,10 @@ const ejs            = require("ejs");
 const bodyParser     = require("body-parser");
 const mongoose       = require("mongoose");
 const methodOverride = require("method-override");
+const passport       = require("passport");
+const LocalStrategy  = require("passport-local");
 const Entry          = require("./models/entry");
+const User           = require("./models/user");
 
 // Defining app routes
 const journalRoutes  = require("./routes/journal");
@@ -25,6 +28,30 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
+
+// Configuring Passport
+app.use(require("express-session")({
+  secret: "secret keyphrase",
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Configuring passport-local
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+//
+app.use(function(req, res, next){
+  res.locals.currentUser = req.user;
+  // res.locals.message = req.flash("error");
+  next();
+});
+
+
+
 
 // Setting app to use routes defined above
 app.use ("/journal", journalRoutes);
