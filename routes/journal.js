@@ -17,10 +17,10 @@ router.get("/", function(req, res){
 // CREATE
 router.post("/", function(req, res){
   // get data from form and add to entries array
-  var name = req.body.name;
+  var title = req.body.title;
   var image = req.body.image;
   var text = req.body.text;
-  var newEntry = {name: name, image: image, text: text};
+  var newEntry = {title: title, image: image, text: text};
   // create new entry and save to entries DB
   Entry.create(newEntry, function(err, newlyCreated){
     if (err){
@@ -44,10 +44,35 @@ router.get("/:id", function(req, res) {
       if (err){
         console.log(err);
       } else {
-        console.log(foundEntry);
         // render show template with that entry
         res.render("journal/show", {entry: foundEntry});
       }
+  });
+});
+
+// EDIT
+router.get("/:id/edit", function(req, res){
+  Entry.findById(req.params.id, function(err, foundEntry){
+    if (err) {
+      console.log(err);
+      res.redirect("journal/:id");
+    } else{
+      res.render("journal/edit", {entry: foundEntry});
+    }
+  });
+});
+
+// UPDATE
+router.put("/:id", function(req, res){
+  // find and update the correct entry
+  Entry.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedEntry){
+    if (err){
+      console.log(err)
+      res.redirect("journal");
+    } else {
+      // return to show page
+      res.redirect("journal/" + req.params.id);
+    }
   });
 });
 

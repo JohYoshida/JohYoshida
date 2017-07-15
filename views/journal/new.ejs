@@ -1,5 +1,35 @@
-<% ../include partials/header %>
+<% include ../partials/header %>
 
-<h1>NEW</h1>
+<div class="ui middle aligned center aligned grid">
 
-<% ../include partials/footer %>
+  <div class="six wide column">
+    <h1 class="header">
+      Create post
+    </h1>
+    <div class="ui hidden divider"></div>
+
+    <form class="ui small form" action="/journal" method="POST">
+      <div class="field">
+        <label>Title</label>
+        <input type="text" name="title" placeholder="title">
+      </div>
+      <div class="field">
+        <label>Image</label>
+        <input type="text" name="image" placeholder="image">
+      </div>
+      <div class="field">
+        <label>Text</label>
+        <textarea name="text" rows="8" cols="80" placeholder="text"></textarea>
+      </div>
+      <button class="ui button">
+        Submit
+      </button>
+    </form>
+
+    <a href="/journal">Go back without editing</a>
+  </div>
+
+</div>
+
+
+<% include ../partials/footer %>

@@ -6,7 +6,7 @@ const express        = require("express");
 const ejs            = require("ejs");
 const bodyParser     = require("body-parser");
 const mongoose       = require("mongoose");
-// const methodOverride = require("method-override");
+const methodOverride = require("method-override");
 const Entry          = require("./models/entry");
 
 // Setting app to use express
@@ -19,7 +19,7 @@ app.use ("/journal", journalRoutes);
 mongoose.connect('mongodb://localhost/test');
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-// app.use(methodOverride("_method"));
+app.use(methodOverride("_method"));
 
 // Entry.create(
 //     {
@@ -40,7 +40,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   // we're connected!
-  console.log("Mongoose connected successfully!")
+  console.log("Mongoose connected successfully!");
 });
 
 // ROUTES
