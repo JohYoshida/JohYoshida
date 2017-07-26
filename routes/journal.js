@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Entry = require("../models/entry");
+const middleware = require("../middleware");
 
 // Journal
 router.get("/", function(req, res){
@@ -15,7 +16,7 @@ router.get("/", function(req, res){
 });
 
 // CREATE
-router.post("/", function(req, res){
+router.post("/", middleware.isLoggedIn, function(req, res){
   // get data from form and add to entries array
   var title = req.body.title;
   var image = req.body.image;
@@ -37,7 +38,7 @@ router.post("/", function(req, res){
 });
 
 // NEW
-router.get("/new", function(req, res){
+router.get("/new", middleware.isLoggedIn, function(req, res){
   res.render("journal/new.ejs");
 });
 
