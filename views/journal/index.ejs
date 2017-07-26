@@ -14,16 +14,16 @@
             </div>
             <div class="content">
               <div class="header">
-                <%= entry.title %>
-                <b> <%= entry.author %></b>
+                <%= entry.title %> -
+                <%= entry.author.username %>
               </div>
               <div class="text">
                 <%= entry.text %>
               </div>
             </div>
-            <div class="ui button">
-              <a href="journal/<%= entry._id %>">More Info</a>
-            </div>
+            <a class="ui teal button" href="journal/<%= entry._id %>">
+              More Info
+            </a>
           </div>
         </div>
         <% }); %>

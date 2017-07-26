@@ -8,7 +8,7 @@
     <div class="content">
       <div class="header">
         <%= entry.title %>
-        By <%= entry.author %>
+        By <%= entry.author.username %>
       </div>
       <div class="text">
         <%= entry.text %>
@@ -16,12 +16,12 @@
     </div>
     <div class="ui centered grid">
       <div class="row">
-        <div class="ui small inverted blue button">
-          <a href="/journal/<%= entry._id %>/edit">Edit entry</a>
-        </div>
-        <div class="ui small button">
-          <a href="/journal">Back to index</a>
-        </div>
+        <a class="ui small inverted blue button" href="/journal/<%= entry._id %>/edit">
+          Edit entry
+        </a>
+        <a class="ui small button" href="/journal">
+          Back to index
+        </a>
       </div>
       <div class="row">
         <form class="deleteForm" action="/journal/<%= entry._id %>?_method=DELETE" method="POST">
