@@ -16,8 +16,8 @@
           <a class="ui button" href="/login">Login</a>
           <a class="ui button" href="/register">Sign Up</a>
         <% } else {%>
-        <li><a href="#">Signed in as <%= currentUser.username %></a></li>
-          <li><a href="/logout">Logout</a></li>
+          <a href="#">Signed in as <%= currentUser.username %></a>
+          <a class="ui button" href="/logout">Logout</a>
         <% } %>
       </ul>
     </nav>

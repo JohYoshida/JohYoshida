@@ -20,7 +20,11 @@ router.post("/", function(req, res){
   var title = req.body.title;
   var image = req.body.image;
   var text = req.body.text;
-  var newEntry = {title: title, image: image, text: text};
+  var author = {
+    id: req.user._id,
+    username: req.user.username
+  };
+  var newEntry = {title: title, image: image, text: text, author: author};
   // create new entry and save to entries DB
   Entry.create(newEntry, function(err, newlyCreated){
     if (err){

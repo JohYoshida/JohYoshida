@@ -51,9 +51,6 @@ app.use(function(req, res, next){
   next();
 });
 
-
-
-
 // Setting app to use routes defined above
 app.use ("/", indexRoutes);
 app.use ("/journal", journalRoutes);
