@@ -1,10 +1,21 @@
 <% include ./partials/header %>
-<h1>Login</h1>
 
-<form action="/login" method="POST">
-  <input type="text" name="username" placeholder="username">
-  <input type="password" name="password" placeholder="password">
-  <input type="submit" value="Login">
-</form>
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <div class="ui centered card">
+      <h1>Login</h1>
+      <form class="ui form"action="/login" method="POST">
+        <div class="field">
+          <input type="text" name="username" placeholder="username">
+        </div>
+        <div class="field">
+          <input type="password" name="password" placeholder="password">
+        </div>
+        <input class="ui blue button" type="submit" value="Login">
+      </form>
+    </div>
+  </div>
+</div>
+
 
 <% include ./partials/footer %>
