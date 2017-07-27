@@ -1,4 +1,4 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Joh Yoshida</title>
@@ -10,3 +10,14 @@
     <script src="semantic/dist/semantic.min.js"></script>
   </head>
   <body>
+    <nav class="ui padded grid">
+      <ul class="right floated three wide column">
+        <% if(!currentUser){ %>
+          <a class="ui button" href="/login">Login</a>
+          <a class="ui button" href="/register">Sign Up</a>
+        <% } else {%>
+          <a href="#">Signed in as <%= currentUser.username %></a>
+          <a class="ui button" href="/logout">Logout</a>
+        <% } %>
+      </ul>
+    </nav>

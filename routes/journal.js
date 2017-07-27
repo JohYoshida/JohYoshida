@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Entry = require("../models/entry");
+const middleware = require("../middleware");
 
 // Journal
 router.get("/", function(req, res){
@@ -15,12 +16,16 @@ router.get("/", function(req, res){
 });
 
 // CREATE
-router.post("/", function(req, res){
+router.post("/", middleware.isLoggedIn, function(req, res){
   // get data from form and add to entries array
   var title = req.body.title;
   var image = req.body.image;
   var text = req.body.text;
-  var newEntry = {title: title, image: image, text: text};
+  var author = {
+    id: req.user._id,
+    username: req.user.username
+  };
+  var newEntry = {title: title, image: image, text: text, author: author};
   // create new entry and save to entries DB
   Entry.create(newEntry, function(err, newlyCreated){
     if (err){
@@ -33,7 +38,7 @@ router.post("/", function(req, res){
 });
 
 // NEW
-router.get("/new", function(req, res){
+router.get("/new", middleware.isLoggedIn, function(req, res){
   res.render("journal/new.ejs");
 });
 
@@ -52,7 +57,7 @@ router.get("/:id", function(req, res) {
 
 // EDIT
 router.get("/:id/edit", function(req, res){
-  Entry.findById(req.params.id, function(err, foundEntry){
+  Entry.findById(req.params.id, middleware.checkEntryOwnership, function(err, foundEntry){
     if (err) {
       console.log(err);
       res.redirect("journal/:id");
@@ -63,7 +68,7 @@ router.get("/:id/edit", function(req, res){
 });
 
 // UPDATE
-router.put("/:id", function(req, res){
+router.put("/:id", middleware.checkEntryOwnership, function(req, res){
   // find and update the correct entry
   Entry.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedEntry){
     if (err){
@@ -77,7 +82,7 @@ router.put("/:id", function(req, res){
 });
 
 // DESTROY
-router.delete("/:id", function(req, res){
+router.delete("/:id", middleware.checkEntryOwnership, function(req, res){
   Entry.findByIdAndRemove(req.params.id, function(err){
     if (err){
       res.redirect("/journal");
