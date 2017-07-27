@@ -57,7 +57,7 @@ router.get("/:id", function(req, res) {
 
 // EDIT
 router.get("/:id/edit", function(req, res){
-  Entry.findById(req.params.id, function(err, foundEntry){
+  Entry.findById(req.params.id, middleware.checkEntryOwnership, function(err, foundEntry){
     if (err) {
       console.log(err);
       res.redirect("journal/:id");
@@ -68,7 +68,7 @@ router.get("/:id/edit", function(req, res){
 });
 
 // UPDATE
-router.put("/:id", function(req, res){
+router.put("/:id", middleware.checkEntryOwnership, function(req, res){
   // find and update the correct entry
   Entry.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedEntry){
     if (err){
@@ -82,7 +82,7 @@ router.put("/:id", function(req, res){
 });
 
 // DESTROY
-router.delete("/:id", function(req, res){
+router.delete("/:id", middleware.checkEntryOwnership, function(req, res){
   Entry.findByIdAndRemove(req.params.id, function(err){
     if (err){
       res.redirect("/journal");
